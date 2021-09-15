@@ -1,3 +1,6 @@
+
+// Simple Procedural Monte Carlo Approach to Calculate Call Option Price
+
 #include <iostream>
 #include <algorithm>    // std::max(library function) lives under <algorithm>
 #include <cmath>        // std::sqrt() and std::exp() are library functions
@@ -89,7 +92,3 @@ double ComputePayoff(const double & S, const double &X)
 {
     return std::max(0.0, S - X);
 }
-
-
-
-
