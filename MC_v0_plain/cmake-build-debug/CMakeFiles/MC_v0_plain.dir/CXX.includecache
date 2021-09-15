@@ -1,0 +1,22 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/harsh/CLionProject/CPP for Quant Finance/MC_v0_plain/utility.cpp
+utility.h
+/Users/harsh/CLionProject/CPP for Quant Finance/MC_v0_plain/utility.h
+iostream
+-
+stdexcept
+-
+
+/Users/harsh/CLionProject/CPP for Quant Finance/MC_v0_plain/utility.h
+iosfwd
+-
+string
+-
+

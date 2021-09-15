@@ -1,0 +1,4 @@
+/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" "/Users/harsh/CLionProject/CPP for Quant Finance/MC_v0_plain"
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /Users/harsh/CLionProject/CPP for Quant Finance/MC_v0_plain/cmake-build-debug
