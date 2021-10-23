@@ -1,0 +1,4 @@
+/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_DEPENDS_USE_COMPILER=FALSE -G "CodeBlocks - Unix Makefiles" "/Users/harsh/CLionProject/CPP for Quant Finance/MonteCarlo_option_obj"
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /Users/harsh/CLionProject/CPP for Quant Finance/MonteCarlo_option_obj/cmake-build-debug
