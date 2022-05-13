@@ -4,7 +4,7 @@
 #include <ql/quotes/simplequote.hpp>
 #include <ql/termstructures/yieldtermstructure.hpp>
 #include <ql/termstructures/yield/flatforward.hpp>
-#include <ql/termstructures/yield/zerocurve.hpp>
+
 #include <ql/termstructures/volatility/equityfx/blackconstantvol.hpp>
 #include <ql/termstructures/volatility/equityfx/blackvoltermstructure.hpp>
 #include <ql/time/calendars/target.hpp>
@@ -51,10 +51,12 @@ blackscholes black_scholes_formula(double S, double K, double T,
 
     blackscholes results;
     if (call) {
+        cout << "Call is called: ";
         results.value = N(d1)*S - N(d2)*K*exp(-r*T);
         results.delta = N(d1);
         results.theta = -(S*n(d1)*sigma)/(2*sqrt(T)) - r*K*exp(-r*T)*N(d2);
     } else {
+        cout << "Put is called: ";
         results.value = N(-d2)*K*exp(-r*T) -N(-d1)*S;
         results.delta = -N(-d1);
         results.theta = -(S*n(d1)*sigma)/(2*sqrt(T)) + r*K*exp(-r*T)*N(-d2);
@@ -92,6 +94,7 @@ class EuropeanOption : public Instrument {
 EuropeanOption ::EuropeanOption(Real strike, Option::Type type, const Date& exerciseDate, const Handle<Quote>& u,
                                 const Handle<YieldTermStructure>& r, const Handle<BlackVolTermStructure>& sigma)
 : strike_(strike), type_(type), exerciseDate_(exerciseDate), u_(u), r_(r), sigma_(sigma){
+    cout << "Type is " <<type_<<endl;
     registerWith(u_);
     registerWith(r_);
     registerWith(sigma_);
@@ -146,7 +149,7 @@ int main() {
     Settings::instance().evaluationDate() = today;
 
     Real strike = 100.0;
-    Option::Type type = Option::Put;
+    Option::Type type = Option::Call;
     Date exerciseDate = today + 360*3;
 
     shared_ptr<SimpleQuote> u = make_shared<SimpleQuote>(120.0);
@@ -162,20 +165,23 @@ int main() {
 
     EuropeanOption option(strike, type, exerciseDate, U, R, Sigma);
 
-    cout << "value: " << option.NPV() << endl;
+    cout << "option value: " << option.NPV() << endl;
     cout << "delta: " << option.delta() << endl;
     cout << "gamma: " << option.gamma() << endl;
     cout << "theta: " << option.theta() << endl;
 
     u->setValue(115.0);
-    cout << "value after u decreases: " << option.NPV() << endl;
+    cout << "option value after u decreases: " << option.NPV() << endl;
 
     /*
-        value: 6.12402
-        delta: -0.215897
+     * OUTPUT:
+     *
+        Type is Call
+        option value: Call is called: 29.0795
+        delta: 0.784103
         gamma: 0.00704601
-        theta: -1.70893
-        value after u decreases: 7.29565
+        theta: -2.67938
+        option value after u decreases: Call is called: 25.2511
      */
     return 0;
 }
